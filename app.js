@@ -54,86 +54,91 @@ app.get('/', (req, res) => {
     );
   })
 
-  app.get('/marketing', (req, res) => {
+app.get('/marketing', (req, res) => {
 
-    const marketingUsers = filterSpeciality('marketing')
-
-    res.send(`
-      <h1>¡Estás en la página Marketing!</h1>
-      <a href="/">Ir a Principal</a><br>
-      <a href="/marketing">Ir a Marketing</a><br>
-      <a href="/developers">Ir a Developers</a><br>
-      <a href="/qas">Ir a QAs</a><br>
-      <a href="/ventas">Ir a Ventas</a>
-
-            <p>Total usuarios: ${marketingUsers.length}</p>
-        <ul>
-            ${marketingUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
-        </ul>
-    `
-    );
-  })
-
-  app.get('/developers', (req, res) => {
-    
-    const developersgUsers = filterSpeciality('developers')
+const marketingUsers = filterSpeciality('marketing')
 
     res.send(`
-      <h1>¡Estás en la página Developers!</h1>
-      <a href="/">Ir a Principal</a><br>
-      <a href="/marketing">Ir a Marketing</a><br>
-      <a href="/developers">Ir a Developers</a><br>
-      <a href="/qas">Ir a QAs</a><br>
-      <a href="/ventas">Ir a Ventas</a>
+    <h1>¡Estás en la página Marketing!</h1>
+    <a href="/">Ir a Principal</a><br>
+    <a href="/marketing">Ir a Marketing</a><br>
+    <a href="/developers">Ir a Developers</a><br>
+    <a href="/qas">Ir a QAs</a><br>
+    <a href="/ventas">Ir a Ventas</a>
 
-            <p>Total usuarios: ${developersgUsers.length}</p>
-        <ul>
-            ${developersgUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
-        </ul>
+        <p>Total usuarios: ${marketingUsers.length}</p>
+    <ul>
+        ${marketingUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
+    </ul>
     `
-    );
-  })
+);
+})
 
-  app.get('/qas', (req, res) => {
+app.get('/developers', (req, res) => {
 
-    const qasUsers = filterSpeciality('QAs')
+const developersgUsers = filterSpeciality('developers')
 
     res.send(`
-      <h1>¡Estás en la página QAs!</h1>
-      <a href="/">Ir a Principal</a><br>
-      <a href="/marketing">Ir a Marketing</a><br>
-      <a href="/developers">Ir a Developers</a><br>
-      <a href="/qas">Ir a QAs</a><br>
-      <a href="/ventas">Ir a Ventas</a>
+    <h1>¡Estás en la página Developers!</h1>
+    <a href="/">Ir a Principal</a><br>
+    <a href="/marketing">Ir a Marketing</a><br>
+    <a href="/developers">Ir a Developers</a><br>
+    <a href="/qas">Ir a QAs</a><br>
+    <a href="/ventas">Ir a Ventas</a>
 
-            <p>Total usuarios: ${qasUsers.length}</p>
-        <ul>
-            ${qasUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
-        </ul>
+        <p>Total usuarios: ${developersgUsers.length}</p>
+    <ul>
+        ${developersgUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
+    </ul>
     `
     );
-  })
+})
 
-  app.get('/ventas', (req, res) => {
+app.get('/qas', (req, res) => {
 
-    const ventasUsers = filterSpeciality('ventas')
+const qasUsers = filterSpeciality('QAs')
 
     res.send(`
-      <h1>¡Estás en la página Ventas!</h1>
-      <a href="/">Ir a Principal</a><br>
-      <a href="/marketing">Ir a Marketing</a><br>
-      <a href="/developers">Ir a Developers</a><br>
-      <a href="/qas">Ir a QAs</a><br>
-      <a href="/ventas">Ir a Ventas</a>
+    <h1>¡Estás en la página QAs!</h1>
+    <a href="/">Ir a Principal</a><br>
+    <a href="/marketing">Ir a Marketing</a><br>
+    <a href="/developers">Ir a Developers</a><br>
+    <a href="/qas">Ir a QAs</a><br>
+    <a href="/ventas">Ir a Ventas</a>
 
-            <p>Total usuarios: ${ventasUsers.length}</p>
-        <ul>
-            ${ventasUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
-        </ul>
+        <p>Total usuarios: ${qasUsers.length}</p>
+    <ul>
+        ${qasUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
+    </ul>
     `
     );
-  })
+})
 
-  app.listen(PORT, () => {
+app.get('/ventas', (req, res) => {
+
+const ventasUsers = filterSpeciality('ventas')
+
+    res.send(`
+    <h1>¡Estás en la página Ventas!</h1>
+    <a href="/">Ir a Principal</a><br>
+    <a href="/marketing">Ir a Marketing</a><br>
+    <a href="/developers">Ir a Developers</a><br>
+    <a href="/qas">Ir a QAs</a><br>
+    <a href="/ventas">Ir a Ventas</a>
+
+        <p>Total usuarios: ${ventasUsers.length}</p>
+    <ul>
+        ${ventasUsers.map(user => `<li>${user.name}, ${user.age} años</li>`).join('')}
+    </ul>
+    `
+    );
+})
+
+app.use((req, res) => {
+    res.status(404).send('<h1>Página no encontrada</h1><br><a href="/">Ir a Principal</a>');
+});
+
+app.listen(PORT, () => {
     console.log(`Servidor en funcionamiento en http://localhost:${PORT}`);
-  });
+});
+
